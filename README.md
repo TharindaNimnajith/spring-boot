@@ -1,1 +1,1 @@
-# EducationApp_SpringBoot
+# spring-boot
