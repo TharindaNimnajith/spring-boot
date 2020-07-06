@@ -29,8 +29,6 @@ public class LectureController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (NoSuchElementException noSuchElementException) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

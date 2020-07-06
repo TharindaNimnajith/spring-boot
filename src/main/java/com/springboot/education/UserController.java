@@ -3,6 +3,7 @@ package com.springboot.education;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,11 @@ public class UserController {
     @PostMapping("/users")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
+        try {
+            userService.sendMail(user);
+        } catch (MailException mailException) {
+            System.err.println(mailException);
+        }
     }
 
     @PutMapping("/users/{userId}")
@@ -28,8 +34,6 @@ public class UserController {
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (NoSuchElementException noSuchElementException) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
